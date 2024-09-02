@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 계산기</title>
+
+    <script>
+        let displayValue = ''; //input에 보여지는 값
+
+        function appendNumber(number) {
+            displayValue += number; //숫자를 추가
+            updateDisplay();
+        }
+
+        function appendOperator(operator) {
+            displayValue += ' ' + operator + ' ';
+            updateDisplay();
+        }
+
+        function appendDot() {
+            if (!displayValue.endsWith('.')) {
+                displayValue += '.';
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            displayValue = ''; // input 값 초기화
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                displayValue = eval(displayValue).toString();
+                updateDisplay();
+            } catch (error) { //error 감지
+                displayValue = 'Error';
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('display').value = displayValue; //input 값 업로드
+        }
+
+    </script>
+
+    <style>
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            font-family: pretendard-regular;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #display {
+            width: 100%;
+            height: 50px;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: right;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+        }
+
+        button:hover {
+            background-color: #d0d0d0;
+        }
+
+        .equals {
+            justify-content: ;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .equals:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperator('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperator('-')">-</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperator('*')">*</button>
+            <button onclick="appendDot()">.</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendOperator('/')">/</button>
+            <button onclick="calculateResult()" class="equals">=</button>
+        </div>
+    </div>
+</body>
+</html>
